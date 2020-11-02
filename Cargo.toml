@@ -1,0 +1,13 @@
+[package]
+name = "bevy_prototype_inline_assets"
+version = "0.1.0"
+authors = ["Eitan Mosenkis <eitan@mosenkis.net>"]
+edition = "2018"
+
+[dependencies]
+bevy_app = { git = "https://github.com/bevyengine/bevy" }
+bevy_asset = { git = "https://github.com/bevyengine/bevy" }
+bevy_ecs = { git = "https://github.com/bevyengine/bevy" }
+bevy_tasks = { git = "https://github.com/bevyengine/bevy" }
+bevy_utils = { git = "https://github.com/bevyengine/bevy" }
+futures = { version = "0.3", default_features = false }
