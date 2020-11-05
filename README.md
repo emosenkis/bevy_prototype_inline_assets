@@ -9,23 +9,20 @@
 
 ## Status
 
-Works for the latest Bevy commit on GitHub as of 2020-11-02 (`f81208ad`); it
-does not work with Bevy `0.2.1` from crates.io and it will likely need to be
-updated as underlying APIs change at least until the next release of Bevy on
-crates.io. See [Bevy issue 606](https://github.com/bevyengine/bevy/issues/606)
-and the linked PRs for discussion of native Bevy support for bundling assets.
+Works for the Bevy 0.3.0. See [Bevy issue
+606](https://github.com/bevyengine/bevy/issues/606) and the linked PRs for
+discussion of native Bevy support for bundling assets.
 
 ## Installation
 
 ``` shell
-cargo add bevy_prototype_inline_assets --git https://github.com/emosenkis/bevy_prototype_inline_assets --branch main
+cargo add bevy_prototype_inline_assets
 ```
 
 or, in your `Cargo.toml`:
 
 ``` toml
-bevy = { git = "https://github.com/bevyengine/bevy" }
-bevy_prototype_inline_assets = { git = "https://github.com/emosenkis/bevy_prototype_inline_assets", branch = "main" }
+bevy_prototype_inline_assets = "0.1.0"
 ```
 
 ## Usage
@@ -46,7 +43,7 @@ fn main() {
     ];
     App::build()
         .add_resource(inline_assets)
-        .add_plugin_group_with(DefaultPlugins, |group| {
+        .add_plugins_with(DefaultPlugins, |group| {
             group.add_after::<AssetPlugin, _>(InlineAssetsPlugin)
         })
         .init_resource::<HashMap<&'static Path, HandleUntyped>>()

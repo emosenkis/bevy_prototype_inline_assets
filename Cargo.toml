@@ -1,13 +1,17 @@
 [package]
 name = "bevy_prototype_inline_assets"
+description = "Bevy plugin for loading assets that are bundled into the binary."
 version = "0.1.0"
 authors = ["Eitan Mosenkis <eitan@mosenkis.net>"]
 edition = "2018"
+license = "MIT"
+license_file = "LICENSE"
+repository = "https://github.com/emosenkis/bevy_prototype_inline_assets"
 
 [dependencies]
-bevy_app = { git = "https://github.com/bevyengine/bevy" }
-bevy_asset = { git = "https://github.com/bevyengine/bevy" }
-bevy_ecs = { git = "https://github.com/bevyengine/bevy" }
-bevy_tasks = { git = "https://github.com/bevyengine/bevy" }
-bevy_utils = { git = "https://github.com/bevyengine/bevy" }
+bevy_app = "0.3.0"
+bevy_asset = "0.3.0"
+bevy_ecs = "0.3.0"
+bevy_tasks = "0.3.0"
+bevy_utils = "0.3.0"
 futures = { version = "0.3", default_features = false }
