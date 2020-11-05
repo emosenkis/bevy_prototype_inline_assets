@@ -1,5 +1,7 @@
 # Bundled assets for [Bevy](https://github.com/bevyengine/bevy)
 
+[![crates.io](https://img.shields.io/crates/v/bevy_prototype_inline_assets.svg)](https://crates.io/crates/bevy_prototype_inline_assets)
+
 ## Features
 
 - Uses assets from the local filesystem if present for easy development, falls
@@ -22,7 +24,7 @@ cargo add bevy_prototype_inline_assets
 or, in your `Cargo.toml`:
 
 ``` toml
-bevy_prototype_inline_assets = "0.1.0"
+bevy_prototype_inline_assets = "0.1.1"
 ```
 
 ## Usage
