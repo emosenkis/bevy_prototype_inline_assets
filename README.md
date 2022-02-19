@@ -11,7 +11,7 @@
 
 ## Status
 
-Works for the Bevy 0.3.0. See [Bevy issue
+Works for the Bevy 0.6.1. See [Bevy issue
 606](https://github.com/bevyengine/bevy/issues/606) and the linked PRs for
 discussion of native Bevy support for bundling assets.
 
@@ -24,7 +24,7 @@ cargo add bevy_prototype_inline_assets
 or, in your `Cargo.toml`:
 
 ``` toml
-bevy_prototype_inline_assets = "0.1.1"
+bevy_prototype_inline_assets = "0.2.0"
 ```
 
 ## Usage
