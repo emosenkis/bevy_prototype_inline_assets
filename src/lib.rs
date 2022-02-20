@@ -1,14 +1,10 @@
-use bevy_app::{AppBuilder, Plugin};
-#[cfg(target_os = "android")]
-use bevy_asset::AndroidAssetIo;
-#[cfg(all(not(target_arch = "wasm32"), not(target_os = "android")))]
-use bevy_asset::FileAssetIo;
-#[cfg(target_arch = "wasm32")]
-use bevy_asset::WasmAssetIo;
-use bevy_asset::{AssetIo, AssetIoError, AssetServer, AssetServerSettings, HandleUntyped};
-use bevy_ecs::Res;
-use bevy_tasks::IoTaskPool;
-use bevy_utils::BoxedFuture;
+use bevy::app::{App, Plugin};
+use bevy::asset::{
+    AssetIo, AssetIoError, AssetServer, AssetServerSettings, FileAssetIo, HandleUntyped,
+};
+use bevy::ecs::system::Res;
+use bevy::tasks::IoTaskPool;
+use bevy::utils::BoxedFuture;
 use futures::future::TryFutureExt;
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -93,33 +89,27 @@ impl AssetIo for InlineAssetIo {
 pub struct InlineAssetsPlugin;
 
 impl Plugin for InlineAssetsPlugin {
-    fn build(&self, app: &mut AppBuilder) {
-        let task_pool: IoTaskPool = (*app
-            .resources()
-            .get::<IoTaskPool>()
+    fn build(&self, app: &mut App) {
+        let task_pool: IoTaskPool = (app
+            .world
+            .get_resource::<IoTaskPool>()
             .expect("IoTaskPool resource not found"))
         .clone();
 
         let base_asset_io = {
             let settings = app
-                .resources_mut()
-                .get_or_insert_with(AssetServerSettings::default);
+                .world
+                .get_resource_or_insert_with(AssetServerSettings::default);
 
-            #[cfg(all(not(target_arch = "wasm32"), not(target_os = "android")))]
-            let asset_io = FileAssetIo::new(&settings.asset_folder);
-            #[cfg(target_arch = "wasm32")]
-            let asset_io = WasmAssetIo::new(&settings.asset_folder);
-            #[cfg(target_os = "android")]
-            let asset_io = AndroidAssetIo::new(&settings.asset_folder);
-            asset_io
+            FileAssetIo::new(&settings.asset_folder)
         };
 
         let asset_io = app
-            .resources()
-            .get::<InlineAssets>()
+            .world
+            .get_resource::<InlineAssets>()
             .expect("InlineAssets resource not found")
             .io(base_asset_io);
 
-        app.add_resource(AssetServer::new(asset_io, task_pool.0));
+        app.insert_resource(AssetServer::new(asset_io, task_pool.0));
     }
 }
